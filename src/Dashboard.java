@@ -13,6 +13,17 @@ public class Dashboard extends JFrame{
 
     public Dashboard() {
 
+        JTabbedPane tabs = new JTabbedPane();
+
+        JPanel vaultPanel = new JPanel();
+        vaultPanel.add(new JLabel("Vault"));
+
+        JPanel generatorPanel = new JPanel();
+        generatorPanel.add(new JLabel("Password Generator"));
+
+        tabs.add(vaultPanel);
+        tabs.add(generatorPanel);
+
         JFrame dashboard = new JFrame("Woody Vault - Dashboard");
         dashboard.setTitle("WoodyVault");
         dashboard.setSize(1920, 1000);
@@ -40,12 +51,32 @@ public class Dashboard extends JFrame{
             System.exit(0);
         });
 
-        JLabel search = new JLabel("Search");
+        JButton search = new JButton("Search");
         search.setFont(new Font("Segoe UI", Font.PLAIN, 15));
         search.setForeground(primaryText);
-        search.setBounds(30, 70, 500, 50);
+        search.setBackground(buttonAccent);
+        search.setBounds(520, 70, 100, 25);
 
         dashboard.add(search);
+
+        JTextField searchField = new JTextField();
+        searchField.setFont(new Font("Segoe UI", Font.PLAIN, 15));
+        searchField.setForeground(primaryText);
+        searchField.setBackground(buttonAccent);
+        searchField.setBounds(15, 70, 500, 25);
+
+        dashboard.add(searchField);
+
+        searchField.addActionListener((e) -> {
+            String field = searchField.getText();
+            Credentials credentials = new Credentials();
+
+            // if (field.equalsIgnoreCase("all")) {
+            //     credentials.getAllCredentials();
+            // } else if (field.equals("-1") {
+            //     credentials.findByUserName(field);
+            // }
+        });
 
         dashboard.setVisible(true);
     }
