@@ -43,7 +43,6 @@ class GuiLogin {
         passField.setBounds(600, 400, 1000, 35);
         frame.add(passField);
 
-
         JButton button = new JButton("Login");
         button.setBounds(930, 500, 150, 50);
         button.setBackground(buttonAccent);

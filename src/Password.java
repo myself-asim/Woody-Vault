@@ -12,7 +12,7 @@ public class Password {
         Random rand = new Random();
         String pass = "";
 
-        for (int i=0; i<4; i++) {
+        for (int i=0; i<5; i++) {
             pass += upper.charAt(rand.nextInt(26));
             pass += lower.charAt(rand.nextInt(26));
             pass += nums.charAt(rand.nextInt(10));
@@ -25,6 +25,10 @@ public class Password {
     public String passStrengthAnalyzer(String pass) {
 
         int score = 0;
+
+        if (pass.isEmpty()) {
+            return "Enter Password";
+        }
 
         if (pass.length() >= 8) score++;
         if (pass.length() >= 12) score++;
