@@ -85,8 +85,4 @@ class GuiLogin {
 
         frame.setVisible(true);
     }
-
-    public static void main(String[] args) {
-        GuiLogin login = new GuiLogin();
-    }
 }

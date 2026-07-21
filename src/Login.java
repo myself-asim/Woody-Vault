@@ -6,7 +6,12 @@ public class Login {
         return masterPassword.equals(mPass);
     }
 
-    public void changeMasterPassword(String masterPassword) {
-        this.masterPassword = masterPassword;
+    public boolean  changeMasterPassword(String masterPassword) {
+
+        if (this.masterPassword.equals(masterPassword)) {
+            this.masterPassword = masterPassword;
+            return true;
+        }
+        return false;
     }
 }

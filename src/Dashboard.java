@@ -30,7 +30,7 @@ public class Dashboard extends JFrame{
 
         add(tabs);
 
-        JLabel title = new JLabel("Welcome To Woody Vault");
+        JLabel title = new JLabel("Woody Vault - Dashboard");
         title.setFont(new Font("Segoe UI", Font.BOLD, 25));
         title.setForeground(primaryText);
         title.setBounds(820, 0, 500, 50);

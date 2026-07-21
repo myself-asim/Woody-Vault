@@ -1,36 +1,39 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Credentials {
 
-    protected  ArrayList<String> userName;
-    protected  ArrayList<String> passWord;
-    protected  ArrayList<String> site;
+    protected  ArrayList<String> vault;
 
     public Credentials() {
-        userName = new ArrayList<>();
-        passWord = new ArrayList<>();
-        site = new ArrayList<>();
+        vault = new ArrayList<>();
     }
 
-    public void addCredentials(String userName, String passWord, String site) {
-        this.userName.add(userName);
-        this.passWord.add(passWord);
-        this.site.add(site);
-    }
+    public String addCredentials(String userName, String passWord, String site) {
 
-    public void getAllCredentials() {
-        
-        for (int i = 0; i < site.size(); i++) {
-            System.out.println(userName.get(i));
-            System.out.println(passWord.get(i));
-            System.out.println(site.get(i));
+        if (userName.isEmpty() || passWord.isEmpty() || site.isEmpty()) {
+            return  "   Fill All Fields";
         }
+
+        writeToFile(userName, passWord, site);
+
+        this.vault.add(userName);
+        this.vault.add(passWord);
+        this.vault.add(site);
+        return "    Credentials has been Added Successfully";
     }
+
+    // public void getAllCredentials() {
+        
+    // }
 
     public int findByUserName(String userName) {
+
         int index = 0;
-        
-        for (String name: this.userName) {
+        for (String name: this.vault) {
             if (name.equalsIgnoreCase(userName)) {
                 return index;
             } else {
@@ -43,26 +46,63 @@ public class Credentials {
     public void deleteCredentials(int index) {
 
         try {    
-            userName.remove(index);
-            passWord.remove(index);
-            site.remove(index);
+            vault.remove(index);
         } catch (Exception e) {
             System.err.println("Index Out of Range");
         }
     }
 
     public void updateCredentials(String userName, String passWord, String site, int index) {
+        loadVault();
         
         try {
-            this.userName.set(index, site);
-            this.passWord.set(index, site);
-            this.site.set(index, site);
+            this.vault.set(index, userName);
+            this.vault.set(index, passWord);
+            this.vault.set(index, site);
         } catch (Exception e) {
             System.err.println("Index Out of Range");
         }
     }
 
     public int credentialsCounter() {
-        return userName.size();
+        return (vault.size() / 3);
+    }
+
+// File Handling
+    public void writeToFile(String userName, String passWord, String site) {
+        try (FileWriter writer = new FileWriter("Vault.txt", true)) {
+            writer.write(userName + '\n');
+            writer.write(passWord + '\n');
+            writer.write(site + '\n');
+
+            writer.flush();
+        } catch (IOException e) {
+            System.err.println("Error writing to file: " + e.getMessage());
+        }
+    }
+
+    public void loadVault() {
+    vault.clear();
+
+    try (Scanner scanner = new Scanner(new File("Vault.txt"))) {
+
+        while (scanner.hasNextLine()) {
+
+                String username = scanner.nextLine();
+                if (!scanner.hasNextLine()) break;
+
+                String password = scanner.nextLine();
+                if (!scanner.hasNextLine()) break;
+
+                String platform = scanner.nextLine();
+
+                vault.add(username);
+                vault.add(password);
+                vault.add(platform);
+            }
+
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
     }
 }

@@ -68,7 +68,7 @@ public class PasswordTab extends JPanel {
         analyzePass.addActionListener(e -> {
             Password generatingPass = new Password();
 
-            strengthLabel.setText(generatingPass.passStrengthAnalyzer(inputAnalyzePass.getText()));
+            strengthLabel.setText("   " + generatingPass.passStrengthAnalyzer(inputAnalyzePass.getText()));
             revalidate();
             repaint();
         });
