@@ -6,12 +6,15 @@ public class Login {
         return masterPassword.equals(mPass);
     }
 
-    public boolean  changeMasterPassword(String masterPassword) {
+    public String changeMasterPassword(String masterPassword, String newPass, String confirmPass) {
 
         if (this.masterPassword.equals(masterPassword)) {
-            this.masterPassword = masterPassword;
-            return true;
+            if (newPass.equals(confirmPass)) {
+                this.masterPassword = newPass;
+                return "Password Changed Successfully";
+            }
+            return "New Pass & ConfirmPass Should Be Same";
         }
-        return false;
+        return "Wrong Master Password";
     }
 }

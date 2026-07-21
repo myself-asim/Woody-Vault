@@ -16,7 +16,6 @@ public class VaultTab extends JPanel {
 
     protected Credentials credentials = new Credentials();
     protected Password password = new Password();
-    protected Login login = new Login();
 
     public VaultTab() {
 
@@ -175,59 +174,70 @@ public class VaultTab extends JPanel {
                 enterCredOut.setBackground(mutedText);
                 enterCredOut.setText(result);
             }
-            
-        
         });
 
-        JTextArea changePassNote = new JTextArea(10, 30);
+        JTextArea updateCredNote = new JTextArea(10, 30);
 
-        changePassNote.setBackground(mainCanvas);
-        changePassNote.setOpaque(true);
-        changePassNote.setFont(new Font("Segoe UI", Font.PLAIN, 20));
-        changePassNote.setForeground(primaryText);
-        changePassNote.setBounds(1280, 280, 620, 100);
+        updateCredNote.setBackground(mainCanvas);
+        updateCredNote.setOpaque(true);
+        updateCredNote.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+        updateCredNote.setForeground(primaryText);
+        updateCredNote.setBounds(1280, 280, 620, 100);
 
-        changePassNote.setLineWrap(true);
-        changePassNote.setWrapStyleWord(true);
+        updateCredNote.setLineWrap(true);
+        updateCredNote.setWrapStyleWord(true);
+        updateCredNote.setText(
+            "Note:\n" + "Username " + "Password " + "Platform \n" +
+            "Enter the platform of the account you want to update.\n" +
+            "You can change the username and password only.\n" +
+            "The platform cannot be changed."
+        );
 
-        changePassNote.setText("Note:\nEnter your current master password.\nEnter your new master password.\nConfirm the new master password.\nThe new password and confirmation must match.");
-        add(changePassNote);
+        add(updateCredNote);
 
-        JLabel masterPass = new JLabel("                                  Change Master Password");
-        masterPass.setBackground(mainCanvas);
-        masterPass.setOpaque(true);
-        masterPass.setFont(new Font("Segoe UI", Font.PLAIN, 20));
-        masterPass.setForeground(primaryText);
-        masterPass.setBounds(1280, 400, 620, 40);
-        add(masterPass);
+        JTextField updateUserNameField = new JTextField();
+        updateUserNameField.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+        updateUserNameField.setForeground(primaryText);
+        updateUserNameField.setBackground(inputField);
+        updateUserNameField.setBounds(1280, 400, 620, 40);
+        add(updateUserNameField);
 
-        JTextField currentPassField = new JTextField();
-        currentPassField.setFont(new Font("Segoe UI", Font.PLAIN, 20));
-        currentPassField.setForeground(primaryText);
-        currentPassField.setBackground(inputField);
-        currentPassField.setBounds(1280, 450, 620, 40);
-        add(currentPassField);
+        JTextField updatePassField = new JTextField();
+        updatePassField.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+        updatePassField.setForeground(primaryText);
+        updatePassField.setBackground(inputField);
+        updatePassField.setBounds(1280, 450, 620, 40);
+        add(updatePassField);
 
-        JTextField masterPassField = new JTextField();
-        masterPassField.setFont(new Font("Segoe UI", Font.PLAIN, 20));
-        masterPassField.setForeground(primaryText);
-        masterPassField.setBackground(inputField);
-        masterPassField.setBounds(1280, 500, 620, 40);
-        add(masterPassField);
+        JTextField updatePlatformField = new JTextField();
+        updatePlatformField.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+        updatePlatformField.setForeground(primaryText);
+        updatePlatformField.setBackground(inputField);
+        updatePlatformField.setBounds(1280, 500, 620, 40);
+        add(updatePlatformField);
 
-        JTextField confirmPassField = new JTextField();
-        confirmPassField.setFont(new Font("Segoe UI", Font.PLAIN, 20));
-        confirmPassField.setForeground(primaryText);
-        confirmPassField.setBackground(inputField);
-        confirmPassField.setBounds(1280, 550, 620, 40);
-        add(confirmPassField);
-
-        JButton changePass = new JButton("Change Password");
+        JButton changePass = new JButton("Update Password & Platform");
         changePass.setFont(new Font("Segoe UI", Font.PLAIN, 20));
         changePass.setForeground(primaryText);
         changePass.setBackground(buttonAccent);
-        changePass.setBounds(1280, 600, 620, 40);
+        changePass.setBounds(1280, 550, 620, 40);
         add(changePass);
+
+        JLabel credChanged = new JLabel("");
+        credChanged.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+        credChanged.setForeground(primaryText);
+        credChanged.setBackground(mutedText);
+        credChanged.setBounds(1280, 650, 620, 40);
+        setOpaque(true);
+
+        add(credChanged);
+
+        changePass.addActionListener(e -> {
+
+            credentials.updateCredentials(updateUserNameField.getText(), updatePassField.getText(), updatePlatformField.getText());
+            revalidate();
+            repaint();
+        });
 
         JLabel tipLabel = new JLabel("TIP:");
         tipLabel.setFont(new Font("Segoe UI", Font.PLAIN, 20));
@@ -240,20 +250,7 @@ public class VaultTab extends JPanel {
         secTip.setFont(new Font("Segoe UI", Font.PLAIN, 20));
         secTip.setForeground(primaryText);
         secTip.setBackground(buttonAccent);
-        secTip.setBounds(1280, 680, 620, 40);
+        secTip.setBounds(1280, 700, 620, 40);
         add(secTip);
-
-        changePass.addActionListener(e -> {
-
-            // if (login.changeMasterPassword(masterPassField.getText())) {
-            // enterCredOut.setBackground(mutedText);
-            // masterPass
-            // } else {
-            //     enterCredOut.setBackground(destructive);
-            //     enterCredOut.setText("Wrong Password");
-            // }
-            revalidate();
-            repaint();
-        });
     }
 }

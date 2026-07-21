@@ -57,15 +57,25 @@ public class Credentials {
         // }
     }
 
-    public void updateCredentials(String userName, String passWord, String site, int index) {
+    public void updateCredentials(String userName, String passWord, String platform) {
+
         loadVault();
-        
-        try {
-            this.vault.set(index, userName);
-            this.vault.set(index, passWord);
-            this.vault.set(index, site);
-        } catch (Exception e) {
-            System.err.println("Index Out of Range");
+
+        for (int i = 0; i < vault.size(); i++) {
+            if (platform.equalsIgnoreCase(vault.get(i))) {
+                vault.set(i-2, userName);
+                vault.set(i-1, passWord);
+            }
+        }
+
+        try (FileWriter writer = new FileWriter("Vault.txt")) {
+
+            for (String line : vault) {
+                writer.write(line + "\n");
+            }
+
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
     }
 
@@ -113,29 +123,29 @@ public class Credentials {
 
     public void deleteFromVault(int num) {
 
-    loadVault();
+        loadVault();
 
-    int totalCredentials = vault.size() / 3;
+        int totalCredentials = vault.size() / 3;
 
-    if (num < 1 || num > totalCredentials) {
-        System.out.println("Invalid credential number.");
-        return;
-    }
-
-    int index = (num - 1) * 3;
-
-    vault.remove(index);
-    vault.remove(index);
-    vault.remove(index);
-
-    try (FileWriter writer = new FileWriter("Vault.txt")) {
-
-        for (String line : vault) {
-            writer.write(line + "\n");
+        if (num < 1 || num > totalCredentials) {
+            System.out.println("Invalid credential number.");
+            return;
         }
 
-    } catch (IOException e) {
-        System.out.println(e.getMessage());
+        int index = (num - 1) * 3;
+
+        vault.remove(index);
+        vault.remove(index);
+        vault.remove(index);
+
+        try (FileWriter writer = new FileWriter("Vault.txt")) {
+
+            for (String line : vault) {
+                writer.write(line + "\n");
+            }
+
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
-}
 }
