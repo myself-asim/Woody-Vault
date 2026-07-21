@@ -112,27 +112,30 @@ public class Credentials {
     }
 
     public void deleteFromVault(int num) {
-        loadVault();
 
-    try (Scanner scanner = new Scanner(new File("Vault.txt"))) {
+    loadVault();
 
-            vault.remove(num - 1);
-            vault.remove(num - 1);
-            vault.remove(num - 1);
+    int totalCredentials = vault.size() / 3;
 
-            try (FileWriter writer = new FileWriter("Vault.txt")) {
-
-                for (int i=0; i<vault.size(); i++) {
-                    writer.write(vault.get(i) + '\n');
-                }
-
-                writer.flush();
-            } catch (IOException e) {
-                System.err.println("Error writing to file: " + e.getMessage());
-            }
-
-        } catch (Exception e) {
-            System.err.println(e.getMessage());
-        }
+    if (num < 1 || num > totalCredentials) {
+        System.out.println("Invalid credential number.");
+        return;
     }
+
+    int index = (num - 1) * 3;
+
+    vault.remove(index);
+    vault.remove(index);
+    vault.remove(index);
+
+    try (FileWriter writer = new FileWriter("Vault.txt")) {
+
+        for (String line : vault) {
+            writer.write(line + "\n");
+        }
+
+    } catch (IOException e) {
+        System.out.println(e.getMessage());
+    }
+}
 }

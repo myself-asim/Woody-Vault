@@ -56,13 +56,17 @@ public class VaultTab extends JPanel {
         add(deletebtn);
 
         deletebtn.addActionListener(e -> {
+        String text = deleteCred.getText().trim();
 
-            String tempStr = deleteCred.getText();
-
-            if (!(tempStr.isEmpty())) {
-                credentials.deleteCredentials(Integer.parseInt(tempStr));
+            if (!text.isEmpty()) {
+                try {
+                    int num = Integer.parseInt(text);
+                    credentials.deleteFromVault(num);
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(null, "Enter a valid number.");
+                    //NOT Completed RN
+                }
             }
-            
         });
 
         String[] columns = {"S.NO", "Username", "Password", "Platform"};
