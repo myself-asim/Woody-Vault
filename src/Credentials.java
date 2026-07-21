@@ -14,6 +14,10 @@ public class Credentials {
 
     public String addCredentials(String userName, String passWord, String site) {
 
+        if (userName.isEmpty() && passWord.isEmpty() && site.isEmpty()) {
+            return  "Dispose";
+        }
+
         if (userName.isEmpty() || passWord.isEmpty() || site.isEmpty()) {
             return  "   Fill All Fields";
         }
@@ -30,26 +34,27 @@ public class Credentials {
         
     // }
 
-    public int findByUserName(String userName) {
+    // public int findByUserName(String userName) {
 
-        int index = 0;
-        for (String name: this.vault) {
-            if (name.equalsIgnoreCase(userName)) {
-                return index;
-            } else {
-                index++;
-            }
-        }
-        return -1;
-    }
+    //     int index = 0;
+    //     for (String name: this.vault) {
+    //         if (name.equalsIgnoreCase(userName)) {
+    //             return index;
+    //         } else {
+    //             index++;
+    //         }
+    //     }
+    //     return -1;
+    // }
 
     public void deleteCredentials(int index) {
 
-        try {    
-            vault.remove(index);
-        } catch (Exception e) {
-            System.err.println("Index Out of Range");
-        }
+        // try { Delete From Vault Method Below
+        //     ///
+        //     }
+        // } catch (Exception e) {
+        //     System.err.println("Index Out of Range");
+        // }
     }
 
     public void updateCredentials(String userName, String passWord, String site, int index) {
@@ -68,7 +73,7 @@ public class Credentials {
         return (vault.size() / 3);
     }
 
-// File Handling
+    // File Handling
     public void writeToFile(String userName, String passWord, String site) {
         try (FileWriter writer = new FileWriter("Vault.txt", true)) {
             writer.write(userName + '\n');
@@ -99,6 +104,31 @@ public class Credentials {
                 vault.add(username);
                 vault.add(password);
                 vault.add(platform);
+            }
+
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    public void deleteFromVault(int num) {
+        loadVault();
+
+    try (Scanner scanner = new Scanner(new File("Vault.txt"))) {
+
+            vault.remove(num - 1);
+            vault.remove(num - 1);
+            vault.remove(num - 1);
+
+            try (FileWriter writer = new FileWriter("Vault.txt")) {
+
+                for (int i=0; i<vault.size(); i++) {
+                    writer.write(vault.get(i) + '\n');
+                }
+
+                writer.flush();
+            } catch (IOException e) {
+                System.err.println("Error writing to file: " + e.getMessage());
             }
 
         } catch (Exception e) {

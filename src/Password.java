@@ -2,14 +2,52 @@ import java.util.Random;
 
 public class Password {
 
+        String[] securityTips = {
+        "Use a unique password for every account.",
+        "Avoid using personal information in passwords.",
+        "Use at least 12 characters for strong passwords.",
+        "Combine uppercase, lowercase, numbers, and symbols.",
+        "Never reuse the same password across websites.",
+        "Change important passwords periodically.",
+        "Do not share your passwords with anyone.",
+        "Avoid common passwords like '123456' or 'password'.",
+        "Store your passwords in a trusted password manager.",
+        "Enable two-factor authentication whenever available.",
+        "Do not save passwords on public computers.",
+        "Always log out after using shared devices.",
+        "Be cautious of phishing emails asking for passwords.",
+        "Verify website URLs before entering your credentials.",
+        "Do not click suspicious links from unknown sources.",
+        "Update weak passwords as soon as possible.",
+        "Longer passwords are generally more secure.",
+        "Avoid using the same password for work and personal accounts.",
+        "Keep your operating system and browser updated.",
+        "Never send passwords through email or messaging apps.",
+        "Lock your computer when leaving it unattended.",
+        "Use randomly generated passwords for sensitive accounts.",
+        "Review your saved credentials regularly.",
+        "Delete credentials you no longer use.",
+        "Never write passwords where others can easily find them.",
+        "A password manager helps organize multiple credentials.",
+        "Strong passwords reduce the risk of unauthorized access.",
+        "Avoid predictable patterns like 'qwerty' or 'abc123'.",
+        "Think twice before entering passwords on unknown websites.",
+        "Security starts with good password habits."
+    };
+
+    Random rand = new Random();
+
     private final String upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private final String lower = "abcdefghijklmnopqrstuvwxyz";
     private final String symbols = "~!@#$%^&*()_+{}|:<>?";
     private final String nums  = "1234567890";
 
-    public String passGenerate() {
+    public void ceaserCipher(String pass) {
 
-        Random rand = new Random();
+        //Caeser Cipher
+    }
+
+    public String passGenerate() {
         String pass = "";
 
         for (int i=0; i<5; i++) {
@@ -48,5 +86,9 @@ public class Password {
         } else {
             return "Insanely Strong"; // Score 6
         }
+    }
+
+    public String tip() {
+        return securityTips[rand.nextInt(securityTips.length)];
     }
 }

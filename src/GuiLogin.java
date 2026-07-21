@@ -3,13 +3,15 @@ import javax.swing.*;
 
 class GuiLogin {
 
-    protected Color mutedText = new Color(0x718096);
-    protected Color containers = new Color(0x222630);
-    protected Color mainCanvas = new Color(0x1A1D24);
-    protected Color inputField = new Color(0x14161C);
-    protected Color destructive = new Color(0xEF4444);
-    protected Color primaryText = new Color(0xE2E8F0);
-    protected Color buttonAccent = new Color(0x6366F1);
+    protected Color mainCanvas   = new Color(0x0F172A);
+    protected Color containers   = new Color(0x1E293B);
+    protected Color inputField   = new Color(0x0B1120);
+    protected Color borderSubtle = new Color(0x334155);
+    protected Color primaryText  = new Color(0xF8FAFC);
+    protected Color mutedText    = new Color(0x94A3B8);
+    protected Color buttonAccent = new Color(0x0572EC);
+    protected Color brandHighlight = new Color(0x38BDF8);
+    protected Color destructive  = new Color(0xF87171);
     
     public GuiLogin() {
 
@@ -23,24 +25,24 @@ class GuiLogin {
         frame.setLayout(null);
 
         JLabel appName = new JLabel("Woody Vault");
-        appName.setBounds(900, 250, 500, 50);
-        appName.setFont(new Font("Segoe UI", Font.BOLD, 35));
+        appName.setBounds(900, 250, 500, 60);
+        appName.setFont(new Font("Segoe UI", Font.BOLD, 45));
         appName.setForeground(primaryText);
         frame.add(appName);
 
         JLabel passWord = new JLabel("Master Password");
         passWord.setForeground(primaryText);
-        passWord.setFont(new Font("Segoe UI", Font.BOLD, 18));
-        passWord.setBounds(400, 400, 500, 35);
+        passWord.setFont(new Font("Segoe UI", Font.BOLD, 25));
+        passWord.setBounds(250, 400, 500, 35);
         frame.add(passWord);                                                      
                                                                                                                                                                                              
         JTextField passField = new JTextField();
-        passField.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        passField.setFont(new Font("Segoe UI", Font.PLAIN, 25));
         passField.setForeground(primaryText);
         passField.setBackground(inputField);
         passField.setCaretColor(mutedText);
         passField.putClientProperty("caretWidth", 6);
-        passField.setBounds(600, 400, 1000, 35);
+        passField.setBounds(600, 400, 1000, 45);
         frame.add(passField);
 
         JButton button = new JButton("Login");

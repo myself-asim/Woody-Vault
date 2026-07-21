@@ -3,13 +3,15 @@ import javax.swing.*;
 
 public class Dashboard extends JFrame{
 
-    protected Color mutedText = new Color(0x718096);
-    protected Color containers = new Color(0x222630);
-    protected Color mainCanvas = new Color(0x1A1D24);
-    protected Color inputField = new Color(0x14161C);
-    protected Color destructive = new Color(0xEF4444);
-    protected Color primaryText = new Color(0xE2E8F0);
-    protected Color buttonAccent = new Color(0x6366F1);
+    protected Color mainCanvas   = new Color(0x0F172A);
+    protected Color containers   = new Color(0x1E293B);
+    protected Color inputField   = new Color(0x0B1120);
+    protected Color borderSubtle = new Color(0x334155);
+    protected Color primaryText  = new Color(0xF8FAFC);
+    protected Color mutedText    = new Color(0x94A3B8);
+    protected Color buttonAccent = new Color(0x0572EC);
+    protected Color brandHighlight = new Color(0x38BDF8);
+    protected Color destructive  = new Color(0xF87171);
 
     public Dashboard() {
 
