@@ -1,3 +1,5 @@
+package WoodyAPP;
+
 import java.util.Random;
 
 public class Password {
@@ -84,7 +86,7 @@ public class Password {
             return "Fair";
         } else if (score == 4) {
             return "Strong";
-        } else if (score >= 5 && score <= 6 ) {
+        } else if (score >= 5 && score <= 7 ) {
             return "Very Strong";
         } else {
             return "Insanely Strong";
