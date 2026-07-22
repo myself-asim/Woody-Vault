@@ -13,8 +13,6 @@ public class Dashboard extends JFrame{
     protected Color brandHighlight = new Color(0x38BDF8);
     protected Color destructive  = new Color(0xF87171);
 
-    protected UserManuel manuel = new UserManuel();
-
     public Dashboard() {
 
         setTitle("Woody Vault - Dashboard");
