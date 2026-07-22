@@ -192,5 +192,43 @@ class PasswordTab extends JPanel {
     "into different strength levels to encourage better password security.");
 
         add(textArea);
+
+        JLabel caeserShifter = new JLabel("Caeser Shifter");
+        caeserShifter.setForeground(primaryText);
+        caeserShifter.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+        caeserShifter.setBounds(300, 350, 620, 40);
+
+        add(caeserShifter);
+
+        JLabel caeserPass = new JLabel("     Enter Text");
+        caeserPass.setForeground(primaryText);
+        caeserPass.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+        caeserPass.setBounds(10, 400, 200, 40);
+
+        add(caeserPass);
+
+        JLabel charToShift = new JLabel("Char To Shift (int)");
+        charToShift.setForeground(primaryText);
+        charToShift.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+        charToShift.setBounds(10, 450, 620, 40);
+
+        add(charToShift);
+
+        
+        JTextField caeserCipherField = new JTextField();
+        caeserCipherField.setForeground(primaryText);
+        caeserCipherField.setBackground(inputField);
+        caeserCipherField.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+        caeserCipherField.setBounds(250, 400, 800, 40);
+
+        add(caeserCipherField);
+
+        JTextField caeserShiftField = new JTextField();
+        caeserShiftField.setForeground(primaryText);
+        caeserShiftField.setBackground(inputField);
+        caeserShiftField.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+        caeserShiftField.setBounds(250, 450, 100, 40);
+
+        add(caeserShiftField);
     }
 }
