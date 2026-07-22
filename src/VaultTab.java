@@ -73,12 +73,12 @@ public class VaultTab extends JPanel {
         search.addActionListener(e -> {
             String field = searchField.getText();
 
-            if (field.equalsIgnoreCase("all")) {
-                credentials.loadVault();
+            credentials.loadVault();
+            model.setRowCount(0);
 
-                model.setRowCount(0);
-                
-                int num = 1;
+            try {
+                if (field.equalsIgnoreCase("all")) {
+                    int num = 1;
                 for (int i = 0; i < credentials.vault.size(); i += 3) {
 
                     model.addRow(new Object[]{
@@ -88,7 +88,21 @@ public class VaultTab extends JPanel {
                         credentials.vault.get(i + 2)
                     });
                     num++;
+                    }
+                } else {
+                    int num = Integer.parseInt(field);
+                    int idx = (num - 1) * 3;
+
+                    model.addRow(new Object[]{
+                        num,
+                        
+                        credentials.vault.get(idx),
+                        credentials.vault.get(idx+1),
+                        credentials.vault.get(idx+2)
+                    });
                 }
+            } catch (Exception err) {
+                System.out.println("Enter Valid Number");
             }
         });
 
@@ -173,6 +187,9 @@ public class VaultTab extends JPanel {
             } else {
                 enterCredOut.setBackground(mutedText);
                 enterCredOut.setText(result);
+                userNameField.setText("");
+                passwordField.setText("");
+                siteField.setText("");
             }
         });
 
@@ -195,49 +212,56 @@ public class VaultTab extends JPanel {
 
         add(updateCredNote);
 
-        JTextField updateUserNameField = new JTextField();
-        updateUserNameField.setFont(new Font("Segoe UI", Font.PLAIN, 20));
-        updateUserNameField.setForeground(primaryText);
-        updateUserNameField.setBackground(inputField);
-        updateUserNameField.setBounds(1280, 400, 620, 40);
-        add(updateUserNameField);
+        JTextField idxField = new JTextField();
+        idxField.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+        idxField.setForeground(primaryText);
+        idxField.setBackground(inputField);
+        idxField.setBounds(1280, 400, 620, 40);
+        add(idxField);
+
+        JTextField updateUserField = new JTextField();
+        updateUserField.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+        updateUserField.setForeground(primaryText);
+        updateUserField.setBackground(inputField);
+        updateUserField.setBounds(1280, 450, 620, 40);
+        add(updateUserField);
 
         JTextField updatePassField = new JTextField();
         updatePassField.setFont(new Font("Segoe UI", Font.PLAIN, 20));
         updatePassField.setForeground(primaryText);
         updatePassField.setBackground(inputField);
-        updatePassField.setBounds(1280, 450, 620, 40);
+        updatePassField.setBounds(1280, 500, 620, 40);
         add(updatePassField);
 
-        JTextField updatePlatformField = new JTextField();
-        updatePlatformField.setFont(new Font("Segoe UI", Font.PLAIN, 20));
-        updatePlatformField.setForeground(primaryText);
-        updatePlatformField.setBackground(inputField);
-        updatePlatformField.setBounds(1280, 500, 620, 40);
-        add(updatePlatformField);
-
-        JButton changePass = new JButton("Update Password & Platform");
+        JButton changePass = new JButton("Update Username & Password");
         changePass.setFont(new Font("Segoe UI", Font.PLAIN, 20));
         changePass.setForeground(primaryText);
         changePass.setBackground(buttonAccent);
         changePass.setBounds(1280, 550, 620, 40);
         add(changePass);
 
-        JLabel credChanged = new JLabel("");
+        JLabel credChanged = new JLabel("Credentials Updated!");
         credChanged.setFont(new Font("Segoe UI", Font.PLAIN, 20));
         credChanged.setForeground(primaryText);
         credChanged.setBackground(mutedText);
-        credChanged.setBounds(1280, 650, 620, 40);
-        setOpaque(true);
-
-        add(credChanged);
+        credChanged.setBounds(1280, 600, 620, 40);
+        credChanged.setOpaque(true);
 
         changePass.addActionListener(e -> {
-
-            credentials.updateCredentials(updateUserNameField.getText(), updatePassField.getText(), updatePlatformField.getText());
-            revalidate();
-            repaint();
+            credentials.updatePassword(
+                idxField.getText(),
+                updateUserField.getText(), 
+                updatePassField.getText()
+            );
+            add(credChanged);
+            idxField.setText("");
+            updateUserField.setText("");
+            updatePassField.setText("");
+            
+            this.revalidate(); 
+            this.repaint();    
         });
+        
 
         JLabel tipLabel = new JLabel("TIP:");
         tipLabel.setFont(new Font("Segoe UI", Font.PLAIN, 20));

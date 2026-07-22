@@ -30,9 +30,17 @@ public class Credentials {
         return "    Credentials has been Added Successfully";
     }
 
-    // public void getAllCredentials() {
+    public void getSingleCredentials(String index) {
+
+        loadVault();
+        int num = Integer.parseInt(index);
+        int n = (num - 1) * 3 + 2;
+
+        for (int i = 0; i < 3; i++) {
+            vault.get(i);
+        }
         
-    // }
+    }
 
     // public int findByUserName(String userName) {
 
@@ -57,25 +65,22 @@ public class Credentials {
         // }
     }
 
-    public void updateCredentials(String userName, String passWord, String platform) {
+    public void updatePassword(String index, String username, String password) {
+    loadVault();
 
-        loadVault();
+    int idx = Integer.parseInt(index);
+    int n = (idx - 1) * 3;
 
-        for (int i = 0; i < vault.size(); i++) {
-            if (platform.equalsIgnoreCase(vault.get(i))) {
-                vault.set(i-2, userName);
-                vault.set(i-1, passWord);
+    if (n >= 0 && n + 1 < vault.size()) {
+        vault.set(n, username);
+        vault.set(n + 1, password);
+            try (FileWriter writer = new FileWriter("Vault.txt")) {
+                for (String line : vault) {
+                    writer.write(line + "\n");
+                }
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
             }
-        }
-
-        try (FileWriter writer = new FileWriter("Vault.txt")) {
-
-            for (String line : vault) {
-                writer.write(line + "\n");
-            }
-
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
         }
     }
 
