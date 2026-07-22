@@ -20,20 +20,30 @@ public class PasswordTab extends JPanel {
         setLayout(null);
         setBackground(mainCanvas);
 
-        JButton passGen = new JButton("Generate Password");
-        passGen.setBackground(buttonAccent);
-        passGen.setForeground(primaryText);
-        passGen.setFont(new Font("Segoe UI", Font.PLAIN, 15));
-        passGen.setBounds(940, 230, 200, 45);
+        JLabel genPass = new JLabel("                                   Password Generator");
+        genPass.setForeground(primaryText);
+        genPass.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+        genPass.setBounds(1280, 450, 620, 40);
+
+        add(genPass);
 
         JTextField generatedPass = new JTextField();
         generatedPass.setEditable(false);
         generatedPass.setForeground(primaryText);
         generatedPass.setBackground(inputField);
-        generatedPass.setFont(new Font("Segoe UI", Font.PLAIN, 15));
-        generatedPass.setBounds(700, 230, 230, 45);
+        generatedPass.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+        generatedPass.setBounds(1280, 500, 620, 40);
 
         add(generatedPass);
+
+        JButton passGen = new JButton("     Generate Password");
+        passGen.setBackground(buttonAccent);
+        passGen.setForeground(primaryText);
+        passGen.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+        passGen.setBounds(1280, 550, 620, 40);
+
+        add(passGen);
+
 
         passGen.addActionListener((actionEvent) -> {
             Password generatingPass = new Password();
@@ -46,33 +56,38 @@ public class PasswordTab extends JPanel {
         });
         add(passGen);
 
+        JLabel strengthCheckerLabel = new JLabel("                              Password Strength Analyzer");
+        strengthCheckerLabel.setForeground(primaryText);
+        strengthCheckerLabel.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+        strengthCheckerLabel.setBounds(1280, 600, 620, 40);
+
+        add(strengthCheckerLabel);
+
         JTextField inputAnalyzePass = new JTextField();
         inputAnalyzePass.setForeground(primaryText);
         inputAnalyzePass.setBackground(inputField);
-        inputAnalyzePass.setFont(new Font("Segoe UI", Font.PLAIN, 15));
-        inputAnalyzePass.setBounds(630, 300, 300, 45);
+        inputAnalyzePass.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+        inputAnalyzePass.setBounds(1280, 650, 620, 40);
 
         add(inputAnalyzePass);
 
-        JButton analyzePass = new JButton("Analyze Password");
+        JButton analyzePass = new JButton("Analyze Password Strength");
         analyzePass.setBackground(buttonAccent);
         analyzePass.setForeground(primaryText);
-        analyzePass.setFont(new Font("Segoe UI", Font.PLAIN, 15));
-        analyzePass.setBounds(940, 300, 200, 45);
+        analyzePass.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+        analyzePass.setBounds(1280, 700, 620, 40);
 
-        JTextField strengthLabel = new JTextField();
+        JLabel strengthLabel = new JLabel("");
         strengthLabel.setForeground(primaryText);
-        strengthLabel.setBackground(new Color(0x3B82F6));
-        strengthLabel.setEditable(false);
         strengthLabel.setFont(new Font("Segoe UI", Font.PLAIN, 20));
-        strengthLabel.setBounds(415, 300, 200, 45);
+        strengthLabel.setBounds(1280, 750, 620, 40);
 
         add(strengthLabel);
 
         analyzePass.addActionListener(e -> {
             Password generatingPass = new Password();
 
-            strengthLabel.setText("   " + generatingPass.passStrengthAnalyzer(inputAnalyzePass.getText()));
+            strengthLabel.setText("                                     " + generatingPass.passStrengthAnalyzer(inputAnalyzePass.getText()));
             revalidate();
             repaint();
         });
@@ -129,11 +144,21 @@ public class PasswordTab extends JPanel {
         changePass.setBounds(1280, 350, 620, 40);
         add(changePass);
 
+        JLabel passSuccess = new JLabel("");
+        passSuccess.setBackground(mainCanvas);
+        passSuccess.setOpaque(true);
+        passSuccess.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+        passSuccess.setForeground(primaryText);
+        passSuccess.setBounds(1280, 400, 620, 40);
+        add(passSuccess);
+
         changePass.addActionListener(e -> {
 
             String result = login.changeMasterPassword(masterPassField.getText(), currentPassField.getText(), confirmPassField.getText());
 
         if (result.equalsIgnoreCase("Password Changed Successfully")) {
+
+            passSuccess.setText("                       Password Changed Successfully");
             masterPassField.setText("");
             currentPassField.setText("");
             confirmPassField.setText("");
@@ -141,5 +166,29 @@ public class PasswordTab extends JPanel {
             revalidate();
             repaint();
         });
+
+        JTextArea textArea = new JTextArea(100, 200);
+        textArea.setForeground(primaryText);
+        textArea.setBackground(inputField);
+        textArea.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        textArea.setBounds(10, 30, 1200, 300);
+
+        textArea.setOpaque(true);
+
+        textArea.setWrapStyleWord(true);
+        textArea.setLineWrap(true);
+        textArea.setText("\nPassword Strength Guide\n\n" +
+    "Modern password managers such as Bitwarden and 1Password evaluate passwords " +
+    "based on their length, the use of uppercase and lowercase letters, numbers, " +
+    "special characters, and overall randomness. Based on these factors, they estimate " +
+    "how resistant a password is to cracking.\n\n" +
+    "Weak passwords can often be cracked instantly or within seconds, while longer " +
+    "and more complex passwords may take years, millions of years, or even billions " +
+    "of years to crack using current computing technology. These estimates help users " +
+    "understand the importance of creating strong, unique passwords for every account.\n\n" +
+    "WoodyVault analyzes password strength using similar factors and classifies passwords " +
+    "into different strength levels to encourage better password security.");
+
+        add(textArea);
     }
 }

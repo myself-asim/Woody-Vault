@@ -240,12 +240,12 @@ public class VaultTab extends JPanel {
         changePass.setBounds(1280, 550, 620, 40);
         add(changePass);
 
-        JLabel credChanged = new JLabel("Credentials Updated!");
+        JLabel credChanged = new JLabel("");
         credChanged.setFont(new Font("Segoe UI", Font.PLAIN, 20));
         credChanged.setForeground(primaryText);
         credChanged.setBackground(mutedText);
         credChanged.setBounds(1280, 600, 620, 40);
-        credChanged.setOpaque(true);
+        add(credChanged);
 
         changePass.addActionListener(e -> {
             credentials.updatePassword(
@@ -253,7 +253,8 @@ public class VaultTab extends JPanel {
                 updateUserField.getText(), 
                 updatePassField.getText()
             );
-            add(credChanged);
+            credChanged.setText("   Credentials Updated!");
+            credChanged.setOpaque(true);
             idxField.setText("");
             updateUserField.setText("");
             updatePassField.setText("");

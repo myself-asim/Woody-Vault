@@ -70,21 +70,24 @@ public class Password {
 
         if (pass.length() >= 8) score++;
         if (pass.length() >= 12) score++;
+        if (pass.length() >= 16) score++;
         if (pass.matches(".*[A-Z].*")) score++;
         if (pass.matches(".*[a-z].*")) score++;
         if (pass.matches(".*\\d.*")) score++;
         if (pass.matches(".*[^a-zA-Z0-9].*")) score++;
-        
-        if (score <= 2) {
-            return "Weak";         // Scores 0, 1, 2
+
+        if (score == 1) {
+            return "Very Weak";
+        } else if (score == 2) {
+            return "Weak";
         } else if (score == 3) {
-            return "Medium";       // Score 3
+            return "Fair";
         } else if (score == 4) {
-            return "Strong";       // Score 4
-        } else if (score == 5) {
-            return "Very Strong";  // Score 5
+            return "Strong";
+        } else if (score >= 5 && score <= 6 ) {
+            return "Very Strong";
         } else {
-            return "Insanely Strong"; // Score 6
+            return "Insanely Strong";
         }
     }
 
