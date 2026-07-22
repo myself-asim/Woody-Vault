@@ -1,6 +1,6 @@
 package WoodyAPP;
 
-public class Login {
+class Login {
 
     private String masterPassword = "1";
 

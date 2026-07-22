@@ -36,8 +36,8 @@ class GuiLogin {
         passWord.setForeground(primaryText);
         passWord.setFont(new Font("Segoe UI", Font.BOLD, 25));
         passWord.setBounds(250, 400, 500, 35);
-        frame.add(passWord);                                                      
-                                                                                                                                                                                             
+        frame.add(passWord);
+                                                                                                                
         JTextField passField = new JTextField();
         passField.setFont(new Font("Segoe UI", Font.PLAIN, 25));
         passField.setForeground(primaryText);

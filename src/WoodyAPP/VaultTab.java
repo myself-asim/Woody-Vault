@@ -4,7 +4,7 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.table.*;
 
-public class VaultTab extends JPanel {
+class VaultTab extends JPanel {
 
     protected Color mainCanvas   = new Color(0x0F172A);
     protected Color containers   = new Color(0x1E293B);

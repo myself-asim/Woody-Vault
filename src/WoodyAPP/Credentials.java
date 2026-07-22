@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Credentials {
+class Credentials {
 
     protected  ArrayList<String> vault;
 

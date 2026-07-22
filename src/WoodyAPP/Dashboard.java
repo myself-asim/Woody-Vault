@@ -3,7 +3,7 @@ package WoodyAPP;
 import java.awt.*;
 import javax.swing.*;
 
-public class Dashboard extends JFrame{
+class Dashboard extends JFrame{
 
     protected Color mainCanvas   = new Color(0x0F172A);
     protected Color containers   = new Color(0x1E293B);

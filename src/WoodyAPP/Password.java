@@ -2,7 +2,7 @@ package WoodyAPP;
 
 import java.util.Random;
 
-public class Password {
+class Password {
 
         String[] securityTips = {
         "Use a unique password for every account.",
