@@ -155,7 +155,7 @@ class PasswordTab extends JPanel {
         changePass.addActionListener(e -> {
             String tmp = login.changeMasterPassword(currentPassField.getText(), masterPassField.getText(), confirmPassField.getText());
 
-            changePass.setText(tmp);
+            passSuccess.setText(tmp);
             revalidate();
             repaint();
         });

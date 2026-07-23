@@ -54,7 +54,7 @@ class Password implements PasswordUtils{
     public String passGenerate() {
         String pass = "";
 
-        for (int i=0; i<5; i++) {
+        for (int i=0; i<6; i++) {
             pass += upper.charAt(rand.nextInt(26));
             pass += lower.charAt(rand.nextInt(26));
             pass += nums.charAt(rand.nextInt(10));
@@ -81,7 +81,7 @@ class Password implements PasswordUtils{
         if (pass.matches(".*\\d.*")) score++;
         if (pass.matches(".*[^a-zA-Z0-9].*")) score++;
 
-        if (score == 1) {
+        if (score <= 1) {
             return "Very Weak";
         } else if (score == 2) {
             return "Weak";

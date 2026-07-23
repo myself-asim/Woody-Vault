@@ -206,7 +206,7 @@ class VaultTab extends JPanel {
         updateCredNote.setLineWrap(true);
         updateCredNote.setWrapStyleWord(true);
         updateCredNote.setText(
-            "Note:\n" + "S. No" + "Username " + "Password \n" +
+            "Note:\n" + "S. No " + "Username " + "Password \n" +
             "Enter the S.No of the account you want to update.\n" +
             "You can change the username and password only.\n" +
             "The platform cannot be changed."

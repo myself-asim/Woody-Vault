@@ -42,7 +42,7 @@ class Dashboard extends JFrame{
 
         add(title);
 
-        JButton logout = new JButton("Logout");
+        JButton logout = new JButton("Exit");
         logout.setFont(new Font("Segoe UI", Font.PLAIN, 15));
         logout.setForeground(primaryText);
         logout.setBackground(destructive);
