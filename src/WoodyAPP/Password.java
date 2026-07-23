@@ -2,7 +2,13 @@ package WoodyAPP;
 
 import java.util.Random;
 
-class Password {
+interface PasswordUtils {
+    String passGenerate();
+    String passStrengthAnalyzer(String pass);
+    String tip();
+}
+
+class Password implements PasswordUtils{
 
         String[] securityTips = {
         "Use a unique password for every account.",
@@ -44,11 +50,7 @@ class Password {
     private final String symbols = "~!@#$%^&*()_+{}|:<>?";
     private final String nums  = "1234567890";
 
-    public void ceaserCipher(String pass) {
-
-        //Caeser Cipher
-    }
-
+    @Override
     public String passGenerate() {
         String pass = "";
 
@@ -62,6 +64,7 @@ class Password {
         return pass;
     }
 
+    @Override
     public String passStrengthAnalyzer(String pass) {
 
         int score = 0;
@@ -93,7 +96,28 @@ class Password {
         }
     }
 
+    @Override
     public String tip() {
         return securityTips[rand.nextInt(securityTips.length)];
+    }
+
+    public static String shiftedText(String message, int key) {
+
+        String encrypted = "";
+
+        for (int i = 0; i < message.length(); i++) {
+            char ch = message.charAt(i);
+
+            if (ch >= 'A' && ch <= 'Z') {
+                ch = (char) ('A' + (ch - 'A' + key) % 26);
+            }
+            else if (ch >= 'a' && ch <= 'z') {
+                ch = (char) ('a' + (ch - 'a' + key) % 26);
+            }
+            
+            encrypted += ch;
+        }
+
+        return encrypted;
     }
 }

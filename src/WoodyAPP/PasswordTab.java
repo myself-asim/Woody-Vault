@@ -15,7 +15,8 @@ class PasswordTab extends JPanel {
     protected Color brandHighlight = new Color(0x38BDF8);
     protected Color destructive  = new Color(0xF87171);
 
-    protected Login login = new Login();
+    PasswordUtils generatingPass = new Password();
+    Login login = new Login();
 
     public PasswordTab() {
 
@@ -46,9 +47,7 @@ class PasswordTab extends JPanel {
 
         add(passGen);
 
-
         passGen.addActionListener((actionEvent) -> {
-            Password generatingPass = new Password();
 
             generatedPass.setText(generatingPass.passGenerate());
             revalidate();
@@ -87,7 +86,6 @@ class PasswordTab extends JPanel {
         add(strengthLabel);
 
         analyzePass.addActionListener(e -> {
-            Password generatingPass = new Password();
 
             strengthLabel.setText("                                     " + generatingPass.passStrengthAnalyzer(inputAnalyzePass.getText()));
             revalidate();
@@ -155,16 +153,9 @@ class PasswordTab extends JPanel {
         add(passSuccess);
 
         changePass.addActionListener(e -> {
+            String tmp = login.changeMasterPassword(currentPassField.getText(), masterPassField.getText(), confirmPassField.getText());
 
-            String result = login.changeMasterPassword(masterPassField.getText(), currentPassField.getText(), confirmPassField.getText());
-
-        if (result.equalsIgnoreCase("Password Changed Successfully")) {
-
-            passSuccess.setText("                       Password Changed Successfully");
-            masterPassField.setText("");
-            currentPassField.setText("");
-            confirmPassField.setText("");
-        }
+            changePass.setText(tmp);
             revalidate();
             repaint();
         });
@@ -174,6 +165,7 @@ class PasswordTab extends JPanel {
         textArea.setBackground(inputField);
         textArea.setFont(new Font("Segoe UI", Font.PLAIN, 18));
         textArea.setBounds(10, 30, 1200, 300);
+        textArea.setEditable(false);
 
         textArea.setOpaque(true);
 
@@ -230,5 +222,46 @@ class PasswordTab extends JPanel {
         caeserShiftField.setBounds(250, 450, 100, 40);
 
         add(caeserShiftField);
+
+        JButton shiftCharBtn = new JButton("Shift Char");
+        shiftCharBtn.setForeground(primaryText);
+        shiftCharBtn.setBackground(buttonAccent);
+        shiftCharBtn.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+        shiftCharBtn.setBounds(250, 500, 800, 40);
+
+        add(shiftCharBtn);
+
+        JTextArea outputShiftedText = new JTextArea(100, 200);
+        outputShiftedText.setForeground(primaryText);
+        outputShiftedText.setBackground(inputField);
+        outputShiftedText.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        outputShiftedText.setBounds(10, 550, 1200, 200);
+        outputShiftedText.setOpaque(true);
+        outputShiftedText.setEditable(false);
+
+        outputShiftedText.setWrapStyleWord(true);
+        outputShiftedText.setLineWrap(true);
+
+        add(outputShiftedText);
+
+        JLabel numForShift = new JLabel("");
+        numForShift.setForeground(primaryText);
+        numForShift.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+        numForShift.setBounds(380, 450, 400, 40);
+
+        add(numForShift);
+
+        shiftCharBtn.addActionListener(e -> {
+            try {
+                int key = Integer.parseInt(caeserShiftField.getText());
+                String encrypted = Password.shiftedText(caeserCipherField.getText(), key);
+                outputShiftedText.setText("OUTPUT: " + encrypted);
+            } catch (NumberFormatException nfe) {
+               nfe.getStackTrace();
+               numForShift.setBackground(destructive);
+               numForShift.setOpaque(true);
+               numForShift.setText("  Enter Integer BTW 1-26");
+            }
+        });
     }
 }

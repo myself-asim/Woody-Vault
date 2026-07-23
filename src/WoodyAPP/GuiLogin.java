@@ -14,6 +14,8 @@ class GuiLogin {
     protected Color buttonAccent = new Color(0x0572EC);
     protected Color brandHighlight = new Color(0x38BDF8);
     protected Color destructive  = new Color(0xF87171);
+
+    Login login = new Login();
     
     public GuiLogin() {
 
