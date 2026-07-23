@@ -71,7 +71,7 @@ class VaultTab extends JPanel {
         });
 
         String[] columns = {"S.NO", "Username", "Password", "Platform"};
-        DefaultTableModel model = new DefaultTableModel(columns, 0);
+        DefaultTableModel model = new DefaultTableModel(columns, 0); // Object For Table
         search.addActionListener(e -> {
             String field = searchField.getText();
 
@@ -94,6 +94,7 @@ class VaultTab extends JPanel {
                 } else {
                     int num = Integer.parseInt(field);
                     int idx = (num - 1) * 3;
+
 
                     model.addRow(new Object[]{
                         num,

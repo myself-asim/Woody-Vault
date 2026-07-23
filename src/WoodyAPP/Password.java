@@ -101,7 +101,27 @@ class Password implements PasswordUtils{
         return securityTips[rand.nextInt(securityTips.length)];
     }
 
-    public static String shiftedText(String message, int key) {
+    public static String encryptedText(String message, int key) {
+
+        String encrypted = "";
+
+        for (int i = 0; i < message.length(); i++) {
+            char ch = message.charAt(i);
+
+            if (ch >= 'A' && ch <= 'Z') {
+                ch = (char) ('A' + (ch - 'A' + key) % 26);
+            }
+            else if (ch >= 'a' && ch <= 'z') {
+                ch = (char) ('a' + (ch - 'a' + key) % 26);
+            }
+            
+            encrypted += ch;
+        }
+
+        return encrypted;
+    }
+
+    public static String decryptedText(String message, int key) {
 
         String encrypted = "";
 
