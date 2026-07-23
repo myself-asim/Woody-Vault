@@ -123,21 +123,21 @@ class Password implements PasswordUtils{
 
     public static String decryptedText(String message, int key) {
 
-        String encrypted = "";
+        String decrypted = "";
 
         for (int i = 0; i < message.length(); i++) {
             char ch = message.charAt(i);
 
             if (ch >= 'A' && ch <= 'Z') {
-                ch = (char) ('A' + (ch - 'A' + key) % 26);
+                ch = (char) ('A' + (ch - 'A' - key + 26) % 26);
             }
             else if (ch >= 'a' && ch <= 'z') {
-                ch = (char) ('a' + (ch - 'a' + key) % 26);
+                ch = (char) ('a' + (ch - 'a' - key + 26) % 26);
             }
             
-            encrypted += ch;
+            decrypted += ch;
         }
 
-        return encrypted;
+        return decrypted;
     }
 }

@@ -8,6 +8,8 @@ import java.util.Scanner;
 class Login {
 
     public static String masterPassword;
+    
+    Password password = new Password();
 
     public boolean appLogin(String mPass) {
         readMasterPass();
@@ -37,7 +39,7 @@ class Login {
             
             if (scanner.hasNextLine()) {
                 String mPass = scanner.nextLine();
-                masterPassword = mPass;
+                masterPassword = password.decryptedText(mPass, 3);
             }
         } catch (Exception e) {
             System.out.println("Error: IDK");
@@ -47,6 +49,8 @@ class Login {
 
     public void writeToFile(String masterPassword) {
         try (FileWriter writer = new FileWriter("MasterPass.txt")) {
+            
+            masterPassword = password.encryptedText(masterPassword, 3);
             writer.write(masterPassword);
         } catch (IOException e) {
             System.err.println("Error: " + e);

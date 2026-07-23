@@ -40,7 +40,7 @@ class GuiLogin {
         passWord.setBounds(250, 400, 500, 35);
         frame.add(passWord);
                                                                                                                 
-        JTextField passField = new JTextField();
+        JPasswordField passField = new JPasswordField();
         passField.setFont(new Font("Segoe UI", Font.PLAIN, 25));
         passField.setForeground(primaryText);
         passField.setBackground(inputField);

@@ -83,10 +83,12 @@ class VaultTab extends JPanel {
                     int num = 1;
                 for (int i = 0; i < credentials.vault.size(); i += 3) {
 
+                    String decrypt = Password.decryptedText(credentials.vault.get(i+1), 5);
+
                     model.addRow(new Object[]{
                         num,
                         credentials.vault.get(i),
-                        credentials.vault.get(i + 1),
+                        decrypt,
                         credentials.vault.get(i + 2)
                     });
                     num++;
@@ -179,7 +181,9 @@ class VaultTab extends JPanel {
         add(enterCredOut);
 
         enterCredentials.addActionListener(e -> {
-            String result = credentials.addCredentials(userNameField.getText(), passwordField.getText(), siteField.getText());
+
+            String encrypt = Password.encryptedText(passwordField.getText(), 5);
+            String result = credentials.addCredentials(userNameField.getText(), encrypt, siteField.getText());
 
             if (result.equalsIgnoreCase("   Fill All Fields")) {
                 enterCredOut.setBackground(destructive);

@@ -187,22 +187,22 @@ class PasswordTab extends JPanel {
 
         JLabel caeserShifter = new JLabel("Caeser Cipher");
         caeserShifter.setForeground(primaryText);
-        caeserShifter.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+        caeserShifter.setFont(new Font("Segoe UI", Font.BOLD, 25));
         caeserShifter.setBounds(300, 350, 620, 40);
 
         add(caeserShifter);
 
-        JLabel caeserPass = new JLabel("     Enter Text");
+        JLabel caeserPass = new JLabel("TEXT");
         caeserPass.setForeground(primaryText);
         caeserPass.setFont(new Font("Segoe UI", Font.PLAIN, 20));
         caeserPass.setBounds(10, 400, 200, 40);
 
         add(caeserPass);
 
-        JLabel charToShift = new JLabel("Char To Shift (int)");
+        JLabel charToShift = new JLabel("KEY");
         charToShift.setForeground(primaryText);
         charToShift.setFont(new Font("Segoe UI", Font.PLAIN, 20));
-        charToShift.setBounds(10, 450, 620, 40);
+        charToShift.setBounds(10, 450, 200, 40);
 
         add(charToShift);
 
@@ -211,7 +211,7 @@ class PasswordTab extends JPanel {
         caeserCipherField.setForeground(primaryText);
         caeserCipherField.setBackground(inputField);
         caeserCipherField.setFont(new Font("Segoe UI", Font.PLAIN, 20));
-        caeserCipherField.setBounds(250, 400, 800, 40);
+        caeserCipherField.setBounds(100, 400, 500, 40);
 
         add(caeserCipherField);
 
@@ -219,23 +219,47 @@ class PasswordTab extends JPanel {
         caeserShiftField.setForeground(primaryText);
         caeserShiftField.setBackground(inputField);
         caeserShiftField.setFont(new Font("Segoe UI", Font.PLAIN, 20));
-        caeserShiftField.setBounds(250, 450, 100, 40);
+        caeserShiftField.setBounds(100, 450, 500, 40);
 
         add(caeserShiftField);
 
-        JButton shiftCharBtn = new JButton("Encrypt Text");
-        shiftCharBtn.setForeground(primaryText);
-        shiftCharBtn.setBackground(buttonAccent);
-        shiftCharBtn.setFont(new Font("Segoe UI", Font.PLAIN, 20));
-        shiftCharBtn.setBounds(250, 500, 800, 40);
+        JButton encryptText = new JButton("Encrypt Text");
+        encryptText.setForeground(primaryText);
+        encryptText.setBackground(buttonAccent);
+        encryptText.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+        encryptText.setBounds(100, 500, 500, 40);
 
-        add(shiftCharBtn);
+        add(encryptText);
+
+        JTextField decryptTextField = new JTextField();
+        decryptTextField.setForeground(primaryText);
+        decryptTextField.setBackground(inputField);
+        decryptTextField.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+        decryptTextField.setBounds(650, 400, 500, 40);
+
+        add(decryptTextField);
+
+        JTextField decryptionKeyField = new JTextField();
+        decryptionKeyField.setForeground(primaryText);
+        decryptionKeyField.setBackground(inputField);
+        decryptionKeyField.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+        decryptionKeyField.setBounds(650, 450, 500, 40);
+
+        add(decryptionKeyField);
+
+        JButton decryptText = new JButton("Decrypt Text");
+        decryptText.setForeground(primaryText);
+        decryptText.setBackground(buttonAccent);
+        decryptText.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+        decryptText.setBounds(650, 500, 500, 40);
+
+        add(decryptText);
 
         JTextArea outputShiftedText = new JTextArea(100, 200);
         outputShiftedText.setForeground(primaryText);
         outputShiftedText.setBackground(inputField);
         outputShiftedText.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-        outputShiftedText.setBounds(10, 570, 1200, 150);
+        outputShiftedText.setBounds(10, 600, 1200, 150);
         outputShiftedText.setOpaque(true);
         outputShiftedText.setEditable(false);
 
@@ -251,16 +275,29 @@ class PasswordTab extends JPanel {
 
         add(numForShift);
 
-        shiftCharBtn.addActionListener(e -> {
+        encryptText.addActionListener(e -> {
             try {
                 int key = Integer.parseInt(caeserShiftField.getText());
-                String encrypted = Password.encryptedText(caeserCipherField.getText(), key);
-                outputShiftedText.setText("OUTPUT: " + encrypted);
+                String encrypt = Password.encryptedText(caeserCipherField.getText(), key);
+                outputShiftedText.setText("OUTPUT: " + encrypt);
             } catch (NumberFormatException nfe) {
                nfe.getStackTrace();
-               numForShift.setBackground(destructive);
-               numForShift.setOpaque(true);
-               numForShift.setText("  Enter Integer BTW 1-26");
+            //    numForShift.setBackground(destructive);
+            //    numForShift.setOpaque(true);
+            //    numForShift.setText("  Enter Integer BTW 1-26");
+            }
+        });
+
+        decryptText.addActionListener(e -> {
+            try {
+                int key = Integer.parseInt(decryptionKeyField.getText());
+                String decrypted = Password.decryptedText(decryptTextField.getText(), key);
+                outputShiftedText.setText("OUTPUT: " + decrypted);
+            } catch (NumberFormatException nfe) {
+               nfe.getStackTrace();
+            //    numForShift.setBackground(destructive);
+            //    numForShift.setOpaque(true);
+            //    numForShift.setText("Enter Integer BTW 1-26");
             }
         });
     }
